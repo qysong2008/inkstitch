@@ -115,3 +115,22 @@ pytest -k "test_name"            # By name pattern
 - SVG coordinates: pixels
 - Embroidery coordinates: tenths of millimeters (for pystitch)
 - Use conversion utilities when interfacing with pystitch
+
+## Pre-commit Hook (Optional)
+
+Add to `.git/hooks/pre-commit` for automatic style checking:
+```bash
+#!/bin/bash
+cd $(dirname "$0")/../..
+errors=$(make style 2>&1)
+if [ "$?" != "0" ]; then
+    echo "$errors"
+    exit 1
+fi
+```
+
+## Debugging Tips
+
+- Copy `DEBUG_template.toml` to `DEBUG.toml` before debugging
+- Use `INKSTITCH_OFFLINE_SCRIPT=true` environment variable for standalone testing
+- Logs written to `inkstitch.log` in project directory when debug logging enabled
